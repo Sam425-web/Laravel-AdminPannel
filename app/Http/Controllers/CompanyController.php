@@ -11,19 +11,19 @@ class CompanyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('index');    
+        $this->middleware('auth')->except('index');
     }
 
     public function index()
     {
-        $company = Company::paginate(10);
+        $company = Company::paginate(2);
         return view('company/index', compact('company'));
-    } 
+    }
 
     public function create()
     {
         return view('company/create');
-    } 
+    }
 
     public function store(Request $request)
     {
@@ -35,17 +35,17 @@ class CompanyController extends Controller
             'imagePath' => 'mimes:png,jpg|max:5000|required'
         ]);
 
-        $newImageName = time() . '-' . $request->name . '.' . $request->imagePath->extension(); 
-        
+        $newImageName = time() . '-' . $request->name . '.' . $request->imagePath->extension();
+
         $request->imagePath->move(public_path('images'), $newImageName);
 
         Company::create([
-            'name' => $request->name, 
+            'name' => $request->name,
             'email' => $request->email,
-            'address' => $request->address, 
+            'address' => $request->address,
             'website' => $request->website,
             'imagePath' => $newImageName
-        ]); 
+        ]);
 
         return redirect()->route('company.index');
     }
@@ -71,10 +71,13 @@ class CompanyController extends Controller
 
     public function destroy(Company $company)
     {
-        $imagePath = public_path('/images/'. $company->imagePath);
-        unlink($imagePath);
-        $company->delete(); 
-
+        $imagePath = public_path('/images/' . $company->imagePath);
+        if ($imagePath) {
+            $company->delete();
+        } else {
+            unlink($imagePath);
+            $company->delete();
+        } 
         return redirect()->route('company.index');
     }
 }

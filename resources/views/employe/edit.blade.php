@@ -1,9 +1,20 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('content_header')
+<br>
+@stop
 
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
+      @if ($errors->any())
+      <div>
+        @foreach ($errors->all() as $error)
+        <p class="alert alert-danger" role="alert">{{ $error }}</p>
+        @endforeach
+      </div>
+      @endif
       <div class="card">
         <div class="card-header">
           <h3>Edit a new Employe</h3>

@@ -15,8 +15,9 @@ use App\Http\Controllers\EmployeController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+ 
 Route::get('/',[CompanyController::class, 'index']);
+ 
 
 Auth::routes();
 

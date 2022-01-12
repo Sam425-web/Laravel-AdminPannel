@@ -1,9 +1,20 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('content_header')
+<br>
+@stop
 
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
+      @if ($errors->any())
+      <div>
+        @foreach ($errors->all() as $error)
+        <p class="alert alert-danger" role="alert">{{ $error }}</p>
+        @endforeach
+      </div>
+      @endif
       <div class="card">
         <div class="card-header">
           <h3>Create a new Employe</h3>
@@ -25,8 +36,8 @@
               <div class="col-12 mt-3">
                 <input type="text" class="form-control" placeholder="Email" name="email">
               </div>
-              <div class="col-12 mt-3">
-                <select name="company_id" class="form-select">
+              <div class="col-12 mt-3 form-group">
+                <select name="company_id" class="form-select custom-select form-control-border">
                     @foreach ($companies as $company)
                       <option value="{{ $company->id }}">{{ $company->name }}</option>
                     @endforeach

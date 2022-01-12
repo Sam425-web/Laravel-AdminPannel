@@ -1,26 +1,38 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Employe')
+
+@section('content_header')
+<a href="{{ route("employe.create") }}" class="btn btn-sm btn-success">Create new employe</a>
+@stop
 
 @section('content')
 <div class="container">
   <div class="card">
-    <div class="card-header">Employe</div>
-    <div class="card-body">
-      <a href="{{ route("employe.create") }}" class="btn btn-success">Create new employe</a>
-      <table class="table table-bordered my-3">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Company</th>
-            <th>Email</th>
-            <th>Phone No</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+  <div class="card-header">
+        <h3 class="card-title">Employe Table</h3>
+      
+        <div class="card-tools">
+          {{-- {!! $employe->links() !!} --}}
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body p-0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>FirstName</th>
+              <th>LastName</th>
+              <th>Company</th>
+              <th>Email</th>
+              <th>PhoneNo</th>
+            </tr>
+          </thead>
+          <tbody>
           @foreach ($employe as $item)
           <tr>
+            <td>{{ $item->id }}</td>
             <td>{{ $item->firstName }}</td>
             <td>{{ $item->lastName }}</td>
             <td>{{ $item->company->name }}</td>
@@ -44,3 +56,14 @@
   </div>
 </div>
 @endsection
+
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+  console.log('Hi!'); 
+</script>
+@stop
