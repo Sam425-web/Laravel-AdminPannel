@@ -9,6 +9,7 @@
 * Database migrations and seeds
 * Form Validation and Requests 
 * Basic Bootstrap front-end
+* Use AdminLTE theme
 * Pagination     
 
 ***
